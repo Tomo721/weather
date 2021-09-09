@@ -1,23 +1,15 @@
 <template>
   <div id="app">
-    <weather/>
+    <weather-widget/>
   </div>
 </template>
 
 <script>
-import weather from '@/views/AppWeather.vue'
+import weatherWidget from '@/views/AppWeatherWidget.vue'
 
 export default {
-  data () {
-    return {
-      
-    }
-  },
-  methods: {
-    
-  },
   components: {
-    weather
+    weatherWidget
   },
 }
 </script>
