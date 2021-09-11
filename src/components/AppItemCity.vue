@@ -55,7 +55,7 @@ export default {
 
     &__title {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: bold;
 
       span {
         text-transform: uppercase;
