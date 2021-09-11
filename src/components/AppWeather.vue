@@ -11,7 +11,11 @@
         </div>
         <settings-city
           v-if="settings"
+          :city="city"
+          :countryCode="countryCode"
           @settingClose="settingClose"
+          @cityChange="cityChange"
+          
         />
       </div>
     </div>
@@ -70,22 +74,10 @@ import settingsCity from '@/components/AppSettingsCity'
 
 export default {
   props: {
-    city: {
-      type: String,
-      required: true,
-    },
     countryCode: {
       type: String,
       required: true,
     },
-    latitude: {
-      type: Number,
-      required: true,
-    },
-    longitude: {
-      type: Number,
-      required: true,
-    }
   },
   data() {
     return {
@@ -106,7 +98,17 @@ export default {
       settings: false,
     }
   },
-  
+  computed: {
+    city() {
+      return this.$store.state.city.name
+    },
+    latitude() {
+      return this.$store.state.city.lat
+    },
+    longitude() {
+      return this.$store.state.city.lng
+    }
+  },
   methods: {
     arrowWind() {
       let deg = this.windDdeg
@@ -121,7 +123,9 @@ export default {
     async getWeather() {
       const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.latitude}&lon=${this.longitude}&exclude=hourly,daily,minutely&units=metric&appid=${this.weatherKey}`)
         .then(response => response.json())
-        .catch(err => console.error(err));
+        .catch(err => console.error(err))
+      
+      if(!response) return false
 
       this.feelsLike = response.current.feels_like
       this.weatherImg = response.current.weather[0].icon + '@2x.png'
@@ -154,6 +158,9 @@ export default {
     },
     settingClose() {
       this.settings = !this.settings
+    },
+    cityChange() {
+      this.getWeather()
     },
   },
   mounted () {

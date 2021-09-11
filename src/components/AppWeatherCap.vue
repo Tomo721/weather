@@ -13,20 +13,18 @@
 <script>
 
 export default {
-  props: {
-    city: {
-      type: String,
-      required: true,
-    },
-  },
-  data() {
-    return {
+  // props: {
+  //   city: {
+  //     type: String,
+  //     required: true,
+  //   },
+  // },
+  computed: {
+    city() {
+      return this.$store.state.city.name
     }
   },
-  methods: {
-  },
-  mounted() {
-  }
+  
 }
 </script>
 
