@@ -58,12 +58,6 @@ import itemCity from '@/components/AppItemCity'
 import draggable from 'vuedraggable'
 
 export default {
-  props: {
-    countryCode: {
-      type: String,
-      required: true,
-    },
-  },
   data() {
     return {
       newCity: '',
@@ -75,6 +69,9 @@ export default {
   computed: {
     city() {
       return this.$store.state.city.name
+    },
+    code() {
+      return this.$store.state.city.code
     },
     cities: {
       get() {
@@ -88,7 +85,7 @@ export default {
   },
   methods: {
     citiesList() {
-      let currentCity = {name: this.city, code: this.countryCode}
+      let currentCity = {name: this.city, code: this.code}
 
       this.cities = [
         ...this.cities,
@@ -103,7 +100,11 @@ export default {
         .then(response => response.json())
         .catch(err => console.error(err))
 
-      if(!response) return false
+      if(response.results.length === 0) {
+        this.errorsCity = true
+        this.dicsNewCity = 'City search failed'
+        return false
+      }
       const coord = response.results[0].geometry.location
 
       response.results.forEach(arr => {
@@ -160,6 +161,7 @@ export default {
     currentCityChange() {
       if(this.cities[0].name.toLowerCase() !== this.city.toLowerCase()) {
         this.$store.dispatch('cityRename', this.cities[0].name)
+        this.$store.dispatch('codeRename', this.cities[0].code)
         this.$store.dispatch('locationCoord', {lat: this.cities[0].lat, lng: this.cities[0].lng})
 
         this.$emit('cityChange')
@@ -172,6 +174,7 @@ export default {
   watch: {
     cities() {
       this.currentCityChange()
+      window.localStorage.setItem('cities', JSON.stringify(this.cities))
     }
   },
   components: {

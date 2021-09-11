@@ -1,7 +1,7 @@
 <template>
   <div class="weather" v-if="city">
     <div class="weather__head">
-      <div class="weather__city">{{ city }}, <span>{{ countryCode }}</span></div>
+      <div class="weather__city">{{ city }}, <span>{{ code }}</span></div>
       <div class="set">
         <div class="set__icon" @click="settings=true">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 368 368">
@@ -12,7 +12,6 @@
         <settings-city
           v-if="settings"
           :city="city"
-          :countryCode="countryCode"
           @settingClose="settingClose"
           @cityChange="cityChange"
           
@@ -73,12 +72,6 @@
 import settingsCity from '@/components/AppSettingsCity'
 
 export default {
-  props: {
-    countryCode: {
-      type: String,
-      required: true,
-    },
-  },
   data() {
     return {
       weatherKey: '6db234b958faf96691daa8f5a43ff55e',
@@ -101,6 +94,9 @@ export default {
   computed: {
     city() {
       return this.$store.state.city.name
+    },
+    code() {
+      return this.$store.state.city.code
     },
     latitude() {
       return this.$store.state.city.lat
