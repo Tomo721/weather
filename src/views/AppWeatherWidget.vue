@@ -3,7 +3,6 @@
     <weather-cap
       v-if="!city"
     />
-
     <weather
       v-if="city"
     />

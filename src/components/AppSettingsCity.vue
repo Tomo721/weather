@@ -203,7 +203,7 @@ export default {
     }
     &__title {
       font-size: 16px;
-      font-weight: 500;
+      font-weight: bold;
     }
     &__close {
       width: 16px;
@@ -241,7 +241,7 @@ export default {
     label {
       display: block;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: bold;
       padding-left: 6px;
       margin-bottom: 4px;
     }

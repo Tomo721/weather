@@ -14,7 +14,6 @@
           :city="city"
           @settingClose="settingClose"
           @cityChange="cityChange"
-          
         />
       </div>
     </div>
@@ -180,7 +179,7 @@ export default {
       z-index: 1;
     }
     &__city {
-      font-weight: 500;
+      font-weight: bold;
 
       span {
         text-transform: uppercase;
@@ -245,7 +244,7 @@ export default {
 
       span {
         letter-spacing: 0;
-        font-weight: 500;
+        font-weight: bold;
       }
     }
   }
