@@ -13,4 +13,16 @@ Vue.use(vueCustomElement)
 Vue.config.productionTip = false
 
 App.store = store
-Vue.customElement('weather-widget', App)
+Vue.customElement('weather-widget', App, {
+  shadow: true,
+  beforeCreateVueInstance(root) {
+    const rootNode = root.el.getRootNode();
+
+    if (rootNode instanceof ShadowRoot) {
+      root.shadowRoot = rootNode;
+    } else {
+      root.shadowRoot = document.head;
+    }
+    return root;
+  },
+})

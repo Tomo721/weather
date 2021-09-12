@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="font-family: Arial, Helvetica, sans-serif;box-sizing: border-box;">
     <weather-widget/>
   </div>
 </template>
@@ -13,16 +13,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-  html {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-  }
-  body {
-    margin: 0;
-  }
-  * {
-    box-sizing: border-box;
-  }
-</style>
