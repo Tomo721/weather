@@ -5,7 +5,7 @@ module.exports = {
     styles: ['./styles']
   },
   loaders: [{
-    test: /\.(scss|css)$/,
+    link: /\.(scss|css)$/,
     loaders: [
       'style',
       'css',
